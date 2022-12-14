@@ -1,8 +1,7 @@
 export function EntradaTexto({ value, onChange }) {
   return (
-    <div>
+    <div className="field">
       <h1>Ingresa el texto en español</h1>
-      <label htmlFor=""></label>
       <input
         className="input"
         value={value}
