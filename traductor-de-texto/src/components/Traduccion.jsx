@@ -11,6 +11,7 @@ export function Traduccion({ contenido, lenguajeSeleccionado }) {
   );
 }
 
+// EL CUSTOM HOOK DEVUELVEUN ARRAY CON EL TEXTO TRADUCIDO
 const useTranslation = (text, language) => {
   const [translated, setTranslated] = useState("");
 
