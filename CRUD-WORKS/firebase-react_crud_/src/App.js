@@ -1,8 +1,10 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import app from "./firebase";
+import AddEmpleado from "./components/AddEmpleado";
 
 function App() {
+  const [newEmpleado, setNewEmpleado] = useState({ name: "", apellido: "" });
   const [empleados, setEmpleados] = useState([]);
 
   // useEffects' callback function
@@ -30,16 +32,31 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>CRUD utilizando React y Firebase como conjunto de servicios</h1>
-
+        | <AddEmpleado setNewEmpleado={setNewEmpleado} />
         <div className="container">
-          {empleados.map((empleado) => (
-            <ol>
-              <li key={empleado.id}>{empleado.nombre}</li>
-            </ol>
-          ))}
+          {/* HEADER DE LA TABLA */}
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                {/* agrego un espacio */}
+                <th>APELLIDO</th>
+              </tr>
+            </thead>
+            {/* BODY DE LA TABLA */}
+            <tbody>
+              {empleados.map((empleado, index) => (
+                <tr key={empleado.id}>
+                  <td>{index + 1}</td>
+                  <td>{empleado.nombre}</td>
+                  <td>{empleado.apellido}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </header>
-      <main></main>
     </div>
   );
 }
