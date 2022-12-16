@@ -1,30 +1,45 @@
 import { useState } from "react";
+import app from "firebase";
 
-function AddEmpleado() {
+function AddEmpleado({ empleados, setEmpleados }) {
   // Funcion para agregar un empleado
   const [nuevoEmpleado, setNuevoEmpleado] = useState({
     nombre: "",
     apellido: "",
   });
 
-  const handleName = (e) => {
-    // console.log(e.target.name, e.target.value);
-    // setNuevoEmpleado({ ...nuevoEmpleado, [e.target.name]: e.target.value });
-    // console.log(nuevoEmpleado);
-  };
-
   const AgregarEmpleado = async (e) => {
     e.preventDefault();
 
-    console.log(e.target.nombre.value);
-    console.log(e.target.apellido.value);
+    // console.log(e.target.nombre.value);
+    // console.log(e.target.apellido.value);
     await setNuevoEmpleado({
-      ...nuevoEmpleado,
       nombre: e.target.nombre.value,
       apellido: e.target.apellido.value,
     });
 
-    await console.log(nuevoEmpleado);
+    // try catch hacia firebase
+    try {
+      const nuevoEmpl = {
+        nombre: nuevoEmpleado.nombre,
+        apellido: nuevoEmpleado.apellido,
+      };
+
+      const db = app.firestore();
+
+      let collection = null;
+
+      if (nuevoEmpl.nombre === "" || nuevoEmpl.apellido === "") {
+        alert("Debe completar todos los campos");
+      } else {
+        collection = db.collection("empleados").add(nuevoEmpl);
+      }
+      // ACTUALIZAMOS LA COLECCIÓN DE EMPLEADOS
+
+      setEmpleados([...empleados, { ...nuevoEmpl, id: collection.id }]);
+    } catch (error) {
+      console.log(error + "al intentar agregar un empleado");
+    }
   };
   return (
     <>

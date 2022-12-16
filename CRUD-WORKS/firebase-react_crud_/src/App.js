@@ -17,7 +17,6 @@ function App() {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(data.docs);
         console.log(arrayData);
         setEmpleados(arrayData);
       } catch (error) {
@@ -32,7 +31,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>CRUD utilizando React y Firebase como conjunto de servicios</h1>
-        | <AddEmpleado setNewEmpleado={setNewEmpleado} />
+        | <AddEmpleado empleados={empleados} setEmpleados={setEmpleados} />
         <div className="container">
           {/* HEADER DE LA TABLA */}
           <table>
