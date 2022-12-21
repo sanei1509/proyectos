@@ -1,19 +1,23 @@
 import GenericCard from "./GenericCard";
 
-const randomImage = `https://random.imagecdn.app/500/${
+let randomImage = `https://random.imagecdn.app/500/${
   150 + Math.floor(Math.random() * 100)
 }`;
-
 function GenericList({ collection }) {
   return (
     <div>
-      {collection.map((item, index) => (
-        <GenericCard
-          title={item.title}
-          description={item.description}
-          image={randomImage}
-        />
-      ))}
+      {collection.map((item, index) => {
+        let randomImage = `https://random.imagecdn.app/500/${
+          150 + Math.floor(Math.random() * 100)
+        }`;
+        return (
+          <GenericCard
+            title={item.title}
+            description={item.description}
+            image={randomImage}
+          />
+        );
+      })}
     </div>
   );
 }
